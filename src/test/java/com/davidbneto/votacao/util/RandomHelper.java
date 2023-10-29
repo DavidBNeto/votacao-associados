@@ -29,8 +29,12 @@ public class RandomHelper {
         return objectMapper.writeValueAsString(gerarObjetoAleatorio(clazz)).toString();
     }
 
+    public static Long gerarLongAleatorio(Long max) {
+        return random(Long.class, new LongRangeRandomizer(MIN_LONG, max));
+    }
+
     public static Long gerarLongAleatorio() {
-        return random(Long.class, new LongRangeRandomizer(MIN_LONG, Long.MAX_VALUE));
+        return gerarLongAleatorio(Long.MAX_VALUE);
     }
 
     private static <T> T random(Class<T> clazz, Randomizer<T> randomizer) {
