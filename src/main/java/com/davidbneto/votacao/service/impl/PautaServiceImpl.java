@@ -24,8 +24,7 @@ public class PautaServiceImpl implements PautaService {
 
     @Override
     public PautaCreationResponse criarPauta(PautaCreationRequest pautaCreationRequest) {
-        var pauta = new Pauta(pautaCreationRequest.getTitulo());
-        pautaRepository.save(pauta);
+        var pauta = pautaRepository.save(new Pauta(pautaCreationRequest.getTitulo()));
         return new PautaCreationResponse(pauta.getId());
     }
 

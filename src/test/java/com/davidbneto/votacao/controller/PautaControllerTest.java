@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static com.davidbneto.votacao.util.RandomHelper.gerarLongAleatorio;
+import static com.davidbneto.votacao.util.RandomHelper.gerarStringAleatoria;
 
 @WebMvcTest(controllers = PautaController.class)
 public class PautaControllerTest {
@@ -31,19 +33,19 @@ public class PautaControllerTest {
         Mockito.when(pautaService.criarPauta(Mockito.any())).thenReturn(new PautaCreationResponse(1L));
         mockMvc.perform(post("/v1/pauta")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"titulo\":\"teste\"}"))
+                .content("{\"titulo\":\"%s\"}".formatted(gerarStringAleatoria())))
                 .andExpect(status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().json("{\"id\":1}"));
     }
 
     @ParameterizedTest
     @DisplayName("Deve iniciar uma votação de uma pauta")
-    @ValueSource(strings = {"{\"minutos\":10, \"id\":1}", "{\"id\":1}"})
+    @ValueSource(strings = {"{\"minutos\":10, \"id\":%d}", "{\"id\":%d}"})
     void iniciarVotacao(String body) throws Exception {
         Mockito.when(pautaService.criarPauta(Mockito.any())).thenReturn(new PautaCreationResponse(1L));
         mockMvc.perform(post("/v1/pauta/iniciar")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(body))
+                .content(body.formatted(gerarLongAleatorio())))
                 .andExpect(status().isOk());
     }
 }
