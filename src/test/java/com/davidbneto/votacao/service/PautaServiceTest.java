@@ -20,7 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static com.davidbneto.votacao.util.RandomHelper.gerarOjetoAleatorio;
+import static com.davidbneto.votacao.util.RandomHelper.gerarObjetoAleatorio;
 import static com.davidbneto.votacao.util.RandomHelper.gerarLongAleatorio;
 import static com.davidbneto.votacao.util.RandomHelper.gerarStringAleatoria;
 
@@ -52,7 +52,7 @@ class PautaServiceTest {
         var pautaSpy = Mockito.spy(pauta);
 
         Mockito.when(pautaRepository.findById(anyLong())).thenReturn(Optional.of(pautaSpy));
-        PautaVotingRequest request = gerarOjetoAleatorio(PautaVotingRequest.class);
+        PautaVotingRequest request = gerarObjetoAleatorio(PautaVotingRequest.class);
 
         assertDoesNotThrow( () -> pautaService.iniciarVotacao(request));
         assertNotNull(pautaSpy.getInicioDaVotacao());
@@ -65,7 +65,7 @@ class PautaServiceTest {
         pautaService = new PautaServiceImpl(pautaRepository);
 
         Mockito.when(pautaRepository.findById(anyLong())).thenReturn(Optional.empty());
-        PautaVotingRequest request = gerarOjetoAleatorio(PautaVotingRequest.class);
+        PautaVotingRequest request = gerarObjetoAleatorio(PautaVotingRequest.class);
 
         assertThrows( PautaException.class, () -> pautaService.iniciarVotacao(request));
     }
@@ -81,7 +81,7 @@ class PautaServiceTest {
         var pautaSpy = Mockito.spy(pauta);
 
         Mockito.when(pautaRepository.findById(anyLong())).thenReturn(Optional.of(pautaSpy));
-        PautaVotingRequest request = gerarOjetoAleatorio(PautaVotingRequest.class);
+        PautaVotingRequest request = gerarObjetoAleatorio(PautaVotingRequest.class);
 
         assertThrows( PautaException.class, () -> pautaService.iniciarVotacao(request));
         assertNull(pautaSpy.getFimDaVotacao());

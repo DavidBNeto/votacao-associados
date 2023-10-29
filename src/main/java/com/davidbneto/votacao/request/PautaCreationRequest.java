@@ -1,6 +1,7 @@
 package com.davidbneto.votacao.request;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PautaCreationRequest {
 
-    String titulo;
+    @JsonProperty("titulo")
+    private String titulo;
 
 }
