@@ -13,6 +13,7 @@ services:
       SPRING_DATASOURCE_USERNAME: usuario
       SPRING_DATASOURCE_PASSWORD: senha
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/votacao
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB_FILTER_COMMONS_REQUEST_LOGGING_FILTER: DEBUG
   postgres:
     image: 'postgres:latest'
     environment:
@@ -21,7 +22,3 @@ services:
       - 'POSTGRES_USER=usuario'
     ports:
       - '5432:5432'
-  redis:
-    image: 'redis:latest'
-    ports:
-      - '6379'
