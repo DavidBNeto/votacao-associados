@@ -25,20 +25,29 @@ public class PautaServiceImpl implements PautaService {
     @Override
     public PautaCreationResponse criarPauta(PautaCreationRequest pautaCreationRequest) {
         var pauta = pautaRepository.save(new Pauta(pautaCreationRequest.getTitulo()));
+        log.info("Pauta {} criada com sucesso", pauta.getId());
         return new PautaCreationResponse(pauta.getId());
     }
 
     @Override
     public void iniciarVotacao(PautaVotingRequest pautaVotingRequest) {
-        var pauta = pautaRepository.findById(pautaVotingRequest.getId())
-                .orElseThrow(() -> new PautaException("Pauta não encontrada"));
+        var possiblePauta = pautaRepository.findById(pautaVotingRequest.getId());
+
+        if (possiblePauta.isEmpty()) {
+            log.error("Pauta {} não encontrada", pautaVotingRequest.getId());
+            throw new PautaException("Pauta não encontrada");
+        }
+
+        var pauta = possiblePauta.get();
 
         if (!isNull(pauta.getInicioDaVotacao())) {
+            log.error("Pauta {} já iniciada", pauta.getId());
             throw new PautaException("Pauta já iniciada");
         }
 
         pauta.setInicioDaVotacao(LocalDateTime.now());
         pauta.setFimDaVotacao(pauta.getInicioDaVotacao().plusMinutes(pautaVotingRequest.getMinutos()));
         pautaRepository.save(pauta);
+        log.info("Votação da pauta {} iniciada com sucesso", pauta.getId());
     }
 }

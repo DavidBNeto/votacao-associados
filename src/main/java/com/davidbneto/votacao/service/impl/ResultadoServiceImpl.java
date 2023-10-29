@@ -33,10 +33,12 @@ public class ResultadoServiceImpl implements ResultadoService {
                 .orElseThrow(() -> new NoSuchElementException("Pauta não encontrada com o id: " + pautaId));
 
         if (pauta.getInicioDaVotacao() == null || pauta.getFimDaVotacao() == null) {
+            log.error("A votação da pauta {} ainda não foi iniciada", pautaId);
             throw new IllegalStateException("A votação da pauta " + pautaId + " ainda não foi iniciada");
         }
 
         if (LocalDateTime.now().isBefore(pauta.getFimDaVotacao())) {
+            log.error("A votação da pauta {} ainda está em andamento", pautaId);
             throw new IllegalStateException("A votação da pauta " + pautaId + " ainda está em andamento");
         }
 
@@ -45,6 +47,8 @@ public class ResultadoServiceImpl implements ResultadoService {
         pauta.setVotosSim(resultado.get("SIM"));
         pauta.setVotosNao(resultado.get("NAO"));
         pautaRepository.save(pauta);
+
+        log.info("Resultado da votação da pauta {} obitdo com sucesso", pauta.getId());
 
         return new ResultadoVotacaoResponse(pauta.getTitulo(), resultado.get("SIM"), resultado.get("NAO"));
     }

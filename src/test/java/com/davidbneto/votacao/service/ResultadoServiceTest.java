@@ -12,7 +12,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static com.davidbneto.votacao.util.RandomHelper.gerarLongAleatorio;
 import static com.davidbneto.votacao.util.RandomHelper.gerarObjetoAleatorio;

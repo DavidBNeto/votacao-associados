@@ -33,7 +33,7 @@ class VotoServiceTest {
 
     @ParameterizedTest
     @DisplayName("Deve votar com sucesso")
-    @ValueSource(strings = {"SIM", "NAO"})
+    @ValueSource(strings = {"SIM", "NAO", "NÃO", "sim", "nao", "não"})
     void votar(String voto) {
         votoService = new VotoServiceImpl(votoRepository, cpfValidator);
         VotoRequest request = gerarObjetoAleatorio(VotoRequest.class);

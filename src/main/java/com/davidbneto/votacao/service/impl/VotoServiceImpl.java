@@ -29,17 +29,20 @@ public class VotoServiceImpl implements VotoService {
         var cpf = cpfValidator.validarCPF(votingRequest.getCpf());
         log.info("Cpf {} válido", cpf);
 
+        votingRequest.setVoto(votingRequest.getVoto().toUpperCase(Locale.ROOT).replace("Ã", "A"));
+
 
         if (votoNaoValido(votingRequest.getVoto().toUpperCase(Locale.ROOT))) {
+            log.error("Voto \"{}\" inválido", votingRequest.getVoto());
             throw new InvalidVoteException(votingRequest.getVoto());
         }
 
         log.info("Validando se cpf {} já votou na pauta {}", votingRequest.getCpf(), votingRequest.getPauta());
 
-        repository.findByCpf(votingRequest.getCpf())
-                .ifPresent(voto -> {
-                    throw new InvalidVoteException(votingRequest.getCpf(), votingRequest.getPauta());
-                });
+        if (repository.findByCpf(votingRequest.getCpf()).isPresent()) {
+            log.error("Cpf {} já votou na pauta {}", votingRequest.getCpf(), votingRequest.getPauta());
+            throw new InvalidVoteException(votingRequest.getCpf(), votingRequest.getPauta());
+        }
 
         log.info("Salvando voto do cpf {} na pauta {}", votingRequest.getCpf(), votingRequest.getPauta());
 

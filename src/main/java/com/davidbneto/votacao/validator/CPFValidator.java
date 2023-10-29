@@ -14,6 +14,7 @@ public class CPFValidator {
         cpf = cpf.replaceAll("[^0-9]", "");
 
         if (cpfInvalido(cpf)) {
+            log.error("CPF {} inválido", cpf);
             throw new CPFValidationException(cpf);
         }
 
@@ -29,6 +30,7 @@ public class CPFValidator {
         }
 
         if (firstVerificationDigit != Character.getNumericValue(cpf.charAt(9))) {
+            log.error("CPF {} inválido", cpf);
             throw new CPFValidationException(cpf);
         }
 
@@ -44,6 +46,7 @@ public class CPFValidator {
         }
 
         if (!(secondVerificationDigit == Character.getNumericValue(cpf.charAt(10)))) {
+            log.error("CPF {} inválido", cpf);
             throw new CPFValidationException(cpf);
         }
 

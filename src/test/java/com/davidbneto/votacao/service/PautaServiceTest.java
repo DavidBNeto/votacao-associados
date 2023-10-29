@@ -1,5 +1,6 @@
 package com.davidbneto.votacao.service;
 
+import com.davidbneto.votacao.entity.Pauta;
 import com.davidbneto.votacao.exception.PautaException;
 import com.davidbneto.votacao.repository.PautaRepository;
 import com.davidbneto.votacao.request.PautaCreationRequest;
@@ -12,17 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.davidbneto.votacao.entity.Pauta;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static com.davidbneto.votacao.util.RandomHelper.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static com.davidbneto.votacao.util.RandomHelper.gerarObjetoAleatorio;
-import static com.davidbneto.votacao.util.RandomHelper.gerarLongAleatorio;
-import static com.davidbneto.votacao.util.RandomHelper.gerarStringAleatoria;
 
 @ExtendWith(MockitoExtension.class)
 class PautaServiceTest {

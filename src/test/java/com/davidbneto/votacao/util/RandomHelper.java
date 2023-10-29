@@ -1,11 +1,11 @@
 package com.davidbneto.votacao.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.benas.randombeans.EnhancedRandomBuilder;
 import io.github.benas.randombeans.api.Randomizer;
 import io.github.benas.randombeans.randomizers.range.LongRangeRandomizer;
 import io.github.benas.randombeans.randomizers.text.StringRandomizer;
 import lombok.NoArgsConstructor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static io.github.benas.randombeans.EnhancedRandomBuilder.aNewEnhancedRandomBuilder;
 import static lombok.AccessLevel.PRIVATE;
