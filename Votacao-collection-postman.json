@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "2b0c626e-a256-4e7f-9675-4de94a51123d",
+		"name": "Votacao",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27079839"
+	},
+	"item": [
+		{
+			"name": "Criar Pauta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Festa na piscina no final de ano\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/v1/pauta"
+			},
+			"response": []
+		},
+		{
+			"name": "Iniciar Votação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/v1/pauta/iniciar"
+			},
+			"response": []
+		},
+		{
+			"name": "Votar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/v1/pauta/iniciar"
+			},
+			"response": []
+		},
+		{
+			"name": "Obter Resultado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/v1/pauta/iniciar"
+			},
+			"response": []
+		}
+	]
+}
