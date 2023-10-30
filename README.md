@@ -38,8 +38,20 @@ Após o comando, a aplicação estará disponível em http://localhost:8080 e é
 Caso queira simular envio de requisições usando postman, existe um arquivo JSON na raiz do projeto com as requisições necessárias para a aplicação.
 
 # Justificativa das escolhas para desenvolvimento
-__Java__ foi ecolhido por ser uma linguagem que tenho ampla experiência, que é bem documentada, possui uma ampla comunidade, que é amplamente utilizada no mercado e por ser uma linguagem tipada e compilada.
-__Postgres__ foi escolhido por ser um banco de dados relacional, que é amplamente utilizado no mercado e por eu possuir ampla experiência.
-__Spring__ foi escolhido por ser um framework que eu tenho ampla experiência, que é bem documentado, possui uma ampla comunidade, que é amplamente utilizado no mercado e por ser um framework que possui uma grande quantidade de recursos que facilitam o desenvolvimento.
-__Docker__ foi utilizado pela facilitação de execução da aplicação e do banco de dados.
-A arquitetura no modelo **SOA** foi escolhida pela ampla utilização e pela facilidade de manutenção e escalabilidade.
+- __Java__ foi ecolhido por ser uma linguagem que tenho ampla experiência, que é bem documentada, possui uma ampla comunidade, que é amplamente utilizada no mercado e por ser uma linguagem tipada e compilada.
+- __Postgres__ foi escolhido por ser um banco de dados relacional, que é amplamente utilizado no mercado e por eu possuir ampla experiência.
+- __Spring__ foi escolhido por ser um framework que eu tenho ampla experiência, que é bem documentado, possui uma ampla comunidade, que é amplamente utilizado no mercado e por ser um framework que possui uma grande quantidade de recursos que facilitam o desenvolvimento.
+- __Docker__ foi utilizado pela facilitação de execução da aplicação e do banco de dados.
+- A arquitetura no modelo **SOA** foi escolhida pela ampla utilização e pela facilidade de manutenção e escalabilidade.
+- __RabbitMQ__ foi escolhido por ser amplamente usado no mercado e de fácil utilização.
+- A api é versionada utilizando as tags 'v1' nos endpoints, por ser de fácil manutenção é fácil adaptação do usuário.
+
+# Melhorias Futuras
+- Implementar testes de integração
+- Implementar testes de contrato
+- Implementar testes de carga
+- Implementar testes de performance
+- Configurar devidamente o swagger
+- Mudar a arquitetura para um modelo de dois serviços, onde um deles é responsável pelas pautas e outro pelos votos, aumentando a escalabilidade
+- Adicionar cache para diminuir o número de requisições ao banco de dados (armazenar as pautas e os votos em memória)
+- Automaticamente gerar o resultado da votação quando o tempo acabar através de mensagens com delay em uma fila

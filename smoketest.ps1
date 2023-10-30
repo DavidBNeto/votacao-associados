@@ -38,4 +38,4 @@ Start-Sleep -Seconds 60
 
 
 Write-Host "=== Obtendo resultado ==="
-Invoke-RestMethod -Uri "$STD_APP_URL/v1/resultado/$PAUTA_ID" -Method POST
+Invoke-RestMethod -Uri "$STD_APP_URL/v1/resultado/$PAUTA_ID" -Method GET
