@@ -22,6 +22,7 @@ Para rodar os testes do projeto, execute o comando abaixo na raiz do projeto:
 Para executar o projeto, execute o comando abaixo na raiz do projeto:
 ```shell
 docker-compose up -d postgres
+docker-compose up -d rabbit
 java -jar build/libs/votacao-associados-0.0.1-SNAPSHOT.jar
 ```
 ou, usando docker

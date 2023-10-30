@@ -1,12 +1,14 @@
 package com.davidbneto.votacao.service.impl;
 
 import com.davidbneto.votacao.entity.Pauta;
+import com.davidbneto.votacao.messaging.Produtor;
 import com.davidbneto.votacao.repository.PautaRepository;
 import com.davidbneto.votacao.repository.VotoRepository;
 import com.davidbneto.votacao.response.ResultadoVotacaoResponse;
 import com.davidbneto.votacao.service.ResultadoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,8 +23,11 @@ import static com.davidbneto.votacao.enumeration.Opcao.SIM;
 @RequiredArgsConstructor
 public class ResultadoServiceImpl implements ResultadoService {
 
+    @Value("${spring.rabbitmq.queues.resultados}")
+    private String filaDeVotacao;
     private final VotoRepository votoRepository;
     private final PautaRepository pautaRepository;
+    private final Produtor produtor;
 
     @Override
     public ResultadoVotacaoResponse obterResultadoVotacao(Long pautaId) {
@@ -50,7 +55,11 @@ public class ResultadoServiceImpl implements ResultadoService {
 
         log.info("Resultado da votação da pauta {} obitdo com sucesso", pauta.getId());
 
-        return new ResultadoVotacaoResponse(pauta.getTitulo(), resultado.get("SIM"), resultado.get("NAO"));
+        ResultadoVotacaoResponse resposta = new ResultadoVotacaoResponse(pauta.getTitulo(), resultado.get("SIM"), resultado.get("NAO"));
+
+        produtor.enviarObjeto(resposta, "resultado-votacao");
+
+        return resposta;
     }
 
     private HashMap<String, Long> contarVotos(Pauta pauta) {
