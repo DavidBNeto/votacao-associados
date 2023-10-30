@@ -4,15 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Builder
+@Setter
 @AllArgsConstructor
 public class PautaVotingRequest {
 
     @JsonProperty("minutos")
-    private int minutos;
+    private Integer minutos;
     @JsonProperty("id_pauta")
-    private final long id;
+    private final Long id;
 
 }

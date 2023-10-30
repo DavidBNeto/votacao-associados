@@ -1,6 +1,5 @@
 package com.davidbneto.votacao.controller;
 
-
 import com.davidbneto.votacao.request.PautaCreationRequest;
 import com.davidbneto.votacao.request.PautaVotingRequest;
 import com.davidbneto.votacao.response.PautaCreationResponse;

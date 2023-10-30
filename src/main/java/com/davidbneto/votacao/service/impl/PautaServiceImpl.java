@@ -45,6 +45,10 @@ public class PautaServiceImpl implements PautaService {
             throw new PautaException("Pauta já iniciada");
         }
 
+        if (pautaVotingRequest.getMinutos() == null) {
+            pautaVotingRequest.setMinutos(1);
+        }
+
         pauta.setInicioDaVotacao(LocalDateTime.now());
         pauta.setFimDaVotacao(pauta.getInicioDaVotacao().plusMinutes(pautaVotingRequest.getMinutos()));
         pautaRepository.save(pauta);
