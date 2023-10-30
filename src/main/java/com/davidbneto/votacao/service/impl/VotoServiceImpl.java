@@ -39,7 +39,7 @@ public class VotoServiceImpl implements VotoService {
 
         log.info("Validando se cpf {} já votou na pauta {}", votingRequest.getCpf(), votingRequest.getPauta());
 
-        if (repository.findByCpf(votingRequest.getCpf()).isPresent()) {
+        if (repository.findByCpf(cpf).isPresent()) {
             log.error("Cpf {} já votou na pauta {}", votingRequest.getCpf(), votingRequest.getPauta());
             throw new InvalidVoteException(votingRequest.getCpf(), votingRequest.getPauta());
         }
