@@ -1,5 +1,6 @@
 package com.davidbneto.votacao.controller;
 
+import com.davidbneto.votacao.controller.impl.ResultadosController;
 import com.davidbneto.votacao.service.ResultadoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = ResultadoController.class)
+@WebMvcTest(controllers = ResultadosController.class)
 public class ResultadoControllerTest {
 
     @Autowired

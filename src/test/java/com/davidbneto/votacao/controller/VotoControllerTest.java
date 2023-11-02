@@ -1,5 +1,6 @@
 package com.davidbneto.votacao.controller;
 
+import com.davidbneto.votacao.controller.impl.VotoController;
 import com.davidbneto.votacao.request.VotoRequest;
 import com.davidbneto.votacao.service.VotoService;
 import org.junit.jupiter.api.DisplayName;

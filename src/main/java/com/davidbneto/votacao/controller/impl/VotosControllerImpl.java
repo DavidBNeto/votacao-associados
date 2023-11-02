@@ -1,5 +1,6 @@
-package com.davidbneto.votacao.controller;
+package com.davidbneto.votacao.controller.impl;
 
+import com.davidbneto.votacao.controller.VotosController;
 import com.davidbneto.votacao.request.VotoRequest;
 import com.davidbneto.votacao.service.VotoService;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/v1/voto")
+@RequestMapping("/v1/votos")
 @RequiredArgsConstructor
-public class VotoController {
+public class VotosControllerImpl implements VotosController {
 
     private final VotoService votoService;
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @Override
     public ResponseEntity<String> votar(@RequestBody VotoRequest votoRequest) {
         votoService.votar(votoRequest);
         return ResponseEntity.ok().build();

@@ -2,7 +2,7 @@ FROM amazoncorretto:17
 
 WORKDIR /app
 
-COPY build/libs/votacao-0.0.1-plain.jar ./app.jar
+COPY build/libs/votacao-0.0.1-SNAPSHOT-plain.jar ./app.jar
 
 EXPOSE 8080
 
