@@ -1,5 +1,6 @@
 package com.davidbneto.votacao.controller;
 
+import com.davidbneto.votacao.controller.impl.VotosControllerImpl;
 import com.davidbneto.votacao.request.VotoRequest;
 import com.davidbneto.votacao.service.VotoService;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = VotoController.class)
+@WebMvcTest(controllers = VotosControllerImpl.class)
 class VotoControllerTest {
 
     @Autowired
@@ -25,7 +26,7 @@ class VotoControllerTest {
     @Test
     @DisplayName("Deve votar com sucesso")
     void votar() throws Exception {
-        mockMvc.perform(post("/v1/voto")
+        mockMvc.perform(post("/v1/votos")
                         .contentType(APPLICATION_JSON)
                         .content(gerarObjetoAleatorioComoString(VotoRequest.class)))
                 .andExpect(status().isOk());

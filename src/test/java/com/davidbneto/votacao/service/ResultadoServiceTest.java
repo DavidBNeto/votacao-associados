@@ -2,6 +2,7 @@ package com.davidbneto.votacao.service;
 
 import com.davidbneto.votacao.entity.Pauta;
 import com.davidbneto.votacao.entity.Voto;
+import com.davidbneto.votacao.messaging.Produtor;
 import com.davidbneto.votacao.repository.PautaRepository;
 import com.davidbneto.votacao.repository.VotoRepository;
 import com.davidbneto.votacao.service.impl.ResultadoServiceImpl;
@@ -25,18 +26,20 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ResultadoServiceTest {
+class ResultadoServiceTest {
 
     @Mock
     PautaRepository pautaRepository;
     @Mock
     VotoRepository votoRepository;
+    @Mock
+    Produtor produtor;
     ResultadoService resultadoService;
 
     @Test
     @DisplayName("Deve obter o resultado da votação de uma pauta com sucesso")
     void obterResultadoVotacao() {
-        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository);
+        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository, produtor);
         Pauta pauta = gerarObjetoAleatorio(Pauta.class);
         long qVotos = gerarLongAleatorio(10L);
 
@@ -52,7 +55,7 @@ public class ResultadoServiceTest {
     @Test
     @DisplayName("Deve lançar uma excessão se o id da pauta não existir")
     void erroAoSolicitarResultadoDePautaNaoExistente() {
-        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository);
+        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository, produtor);
         when(pautaRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(NoSuchElementException.class, () -> resultadoService.obterResultadoVotacao(gerarLongAleatorio()));
     }
@@ -60,7 +63,7 @@ public class ResultadoServiceTest {
     @Test
     @DisplayName("Deve lançar uma excessão se a votação não tiver iniciado")
     void erroAoSolicitarResultadoDePautaCujaVotacaoNaoIniciou() {
-        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository);
+        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository, produtor);
         Pauta pauta = gerarObjetoAleatorio(Pauta.class);
         pauta.setFimDaVotacao(null);
         pauta.setInicioDaVotacao(null);
@@ -71,7 +74,7 @@ public class ResultadoServiceTest {
     @Test
     @DisplayName("Deve lançar uma excessão se a votação não tiver terminado")
     void erroAoSolicitarResultadoDePautaCujaVotacaoNaoTerminou() {
-        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository);
+        resultadoService = new ResultadoServiceImpl(votoRepository, pautaRepository, produtor);
         Pauta pauta = gerarObjetoAleatorio(Pauta.class);
         pauta.setFimDaVotacao(LocalDateTime.now().plusHours(7L));
         when(pautaRepository.findById(anyLong())).thenReturn(Optional.of(pauta));

@@ -1,5 +1,6 @@
 package com.davidbneto.votacao.controller;
 
+import com.davidbneto.votacao.controller.impl.PautasControllerImpl;
 import com.davidbneto.votacao.request.PautaCreationRequest;
 import com.davidbneto.votacao.response.PautaCreationResponse;
 import com.davidbneto.votacao.service.PautaService;
@@ -21,7 +22,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = PautaController.class)
+@WebMvcTest(controllers = PautasControllerImpl.class)
 class PautaControllerTest {
 
     @Autowired
@@ -34,7 +35,7 @@ class PautaControllerTest {
     void criarPautRequest() throws Exception {
         var id = gerarLongAleatorio();
         when(pautaService.criarPauta(any())).thenReturn(new PautaCreationResponse(id));
-        mockMvc.perform(post("/v1/pauta")
+        mockMvc.perform(post("/v1/pautas")
                 .contentType(APPLICATION_JSON)
                 .content(gerarObjetoAleatorioComoString(PautaCreationRequest.class)))
                 .andExpect(status().isCreated())
@@ -45,7 +46,7 @@ class PautaControllerTest {
     @DisplayName("Deve receber a request para iniciar uma votação de uma pauta")
     @ValueSource(strings = {"{\"minutos\":10, \"id_pauta\":%d}", "{\"id_pauta\":%d}"})
     void iniciarVotacaoRequest(String body) throws Exception {
-        mockMvc.perform(post("/v1/pauta/iniciar")
+        mockMvc.perform(post("/v1/pautas/iniciar")
                 .contentType(APPLICATION_JSON)
                 .content(body.formatted(gerarLongAleatorio())))
                 .andExpect(status().isOk());
