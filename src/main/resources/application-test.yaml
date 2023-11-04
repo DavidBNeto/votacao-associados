@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: usuario
+    password: senha
+    url: jdbc:postgresql://localhost:5432/votacao
+  flyway:
+    enabled: false
+    locations: classpath:db/migration

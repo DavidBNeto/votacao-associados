@@ -6,7 +6,6 @@ import com.davidbneto.votacao.service.VotoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ public class VotosControllerImpl implements VotosController {
     private final VotoService votoService;
 
     @Override
-    public ResponseEntity<String> votar(@RequestBody VotoRequest votoRequest) {
+    public ResponseEntity<Void> votar(@RequestBody VotoRequest votoRequest) {
         votoService.votar(votoRequest);
         return ResponseEntity.ok().build();
     }

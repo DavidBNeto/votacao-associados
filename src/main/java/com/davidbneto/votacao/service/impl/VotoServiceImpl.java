@@ -4,6 +4,7 @@ package com.davidbneto.votacao.service.impl;
 import com.davidbneto.votacao.entity.Voto;
 import com.davidbneto.votacao.enumeration.Opcao;
 import com.davidbneto.votacao.exception.InvalidVoteException;
+import com.davidbneto.votacao.repository.PautaRepository;
 import com.davidbneto.votacao.repository.VotoRepository;
 import com.davidbneto.votacao.request.VotoRequest;
 import com.davidbneto.votacao.service.VotoService;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
@@ -20,17 +22,23 @@ import java.util.Locale;
 public class VotoServiceImpl implements VotoService {
 
     private final VotoRepository repository;
+    private final PautaRepository pautaRepository;
     private final CPFValidator cpfValidator;
 
     @Override
     public void votar(VotoRequest votingRequest) {
+
+        log.info("Validando se a pauta {} existe.", votingRequest.getPauta());
+        if (pautaRepository.findById(votingRequest.getPauta()).isEmpty() ) {
+            log.error("Pauta com o id {} não encontrada", votingRequest.getPauta());
+            throw new NoSuchElementException("Pauta não encontrada com o id: " + votingRequest.getPauta());
+        }
 
         log.info("Validando cpf {} para votar na pauta {}", votingRequest.getCpf(), votingRequest.getPauta());
         var cpf = cpfValidator.validarCPF(votingRequest.getCpf());
         log.info("Cpf {} válido", cpf);
 
         votingRequest.setVoto(votingRequest.getVoto().toUpperCase(Locale.ROOT).replace("Ã", "A"));
-
 
         if (votoNaoValido(votingRequest.getVoto().toUpperCase(Locale.ROOT))) {
             log.error("Voto \"{}\" inválido", votingRequest.getVoto());

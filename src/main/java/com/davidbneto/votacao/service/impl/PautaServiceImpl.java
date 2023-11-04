@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 
 import static java.util.Objects.isNull;
 
@@ -35,14 +36,14 @@ public class PautaServiceImpl implements PautaService {
 
         if (possiblePauta.isEmpty()) {
             log.error("Pauta {} não encontrada", pautaVotingRequest.getId());
-            throw new PautaException("Pauta não encontrada");
+            throw new NoSuchElementException("Pauta não encontrada com id " + pautaVotingRequest.getId());
         }
 
         var pauta = possiblePauta.get();
 
         if (!isNull(pauta.getInicioDaVotacao())) {
             log.error("Pauta {} já iniciada", pauta.getId());
-            throw new PautaException("Pauta já iniciada");
+            throw new PautaException("Votação já iniciada da pauta com id " + pautaVotingRequest.getId());
         }
 
         if (pautaVotingRequest.getMinutos() == null) {

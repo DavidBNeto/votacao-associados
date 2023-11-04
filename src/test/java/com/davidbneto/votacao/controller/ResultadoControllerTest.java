@@ -1,6 +1,6 @@
 package com.davidbneto.votacao.controller;
 
-import com.davidbneto.votacao.controller.impl.ResultadosController;
+import com.davidbneto.votacao.controller.impl.ResultadosControllerImpl;
 import com.davidbneto.votacao.service.ResultadoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,11 +11,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static com.davidbneto.votacao.util.RandomHelper.gerarLongAleatorio;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = ResultadosController.class)
-public class ResultadoControllerTest {
+@WebMvcTest(controllers = ResultadosControllerImpl.class)
+class ResultadoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,7 +25,7 @@ public class ResultadoControllerTest {
     @Test
     @DisplayName("Deve receber o resultado da votação de uma pauta")
     void receberResultadoRequest() throws Exception {
-       mockMvc.perform(post("/v1/resultado/" + gerarLongAleatorio())
+       mockMvc.perform(get("/v1/resultados/" + gerarLongAleatorio())
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();

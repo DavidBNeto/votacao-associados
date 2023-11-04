@@ -3,7 +3,6 @@ package com.davidbneto.votacao.controller.impl;
 import com.davidbneto.votacao.controller.ResultadosController;
 import com.davidbneto.votacao.response.ResultadoVotacaoResponse;
 import com.davidbneto.votacao.service.ResultadoService;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,0 +1,26 @@
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: usuario
+    password: senha
+    url: jdbc:postgresql://localhost:5432/votacao
+  rabbitmq:
+    host: localhost
+    queues:
+      resultados: resultados-votacao
+  flyway:
+    locations: classpath:db/migration
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG

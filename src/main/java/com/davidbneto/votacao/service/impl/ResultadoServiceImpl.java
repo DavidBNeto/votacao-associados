@@ -57,7 +57,7 @@ public class ResultadoServiceImpl implements ResultadoService {
 
         ResultadoVotacaoResponse resposta = new ResultadoVotacaoResponse(pauta.getTitulo(), resultado.get("SIM"), resultado.get("NAO"));
 
-        produtor.enviarObjeto(resposta, "resultado-votacao");
+        produtor.enviarObjeto(resposta, filaDeVotacao);
 
         return resposta;
     }
