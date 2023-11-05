@@ -7,8 +7,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/votacao
   rabbitmq:
     host: localhost
-    queues:
-      resultados: resultados-votacao
+    exchanges:
+      resultados:
+        name: resultados-votacao
+        key: resultados123
   flyway:
     locations: classpath:db/migration
 

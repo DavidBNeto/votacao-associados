@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static com.davidbneto.votacao.util.RandomHelper.*;
@@ -65,7 +66,7 @@ class PautaServiceTest {
         Mockito.when(pautaRepository.findById(anyLong())).thenReturn(Optional.empty());
         PautaVotingRequest request = gerarObjetoAleatorio(PautaVotingRequest.class);
 
-        assertThrows( PautaException.class, () -> pautaService.iniciarVotacao(request));
+        assertThrows( NoSuchElementException.class, () -> pautaService.iniciarVotacao(request));
     }
 
     @Test

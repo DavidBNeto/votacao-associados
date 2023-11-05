@@ -23,8 +23,10 @@ import static com.davidbneto.votacao.enumeration.Opcao.SIM;
 @RequiredArgsConstructor
 public class ResultadoServiceImpl implements ResultadoService {
 
-    @Value("${spring.rabbitmq.queues.resultados}")
-    private String filaDeVotacao;
+    @Value("${spring.rabbitmq.exchanges.resultados.name}")
+    private String exchangeDeVotacao;
+    @Value("${spring.rabbitmq.exchanges.resultados.key}")
+    private String keyVotacao;
     private final VotoRepository votoRepository;
     private final PautaRepository pautaRepository;
     private final Produtor produtor;
@@ -57,7 +59,7 @@ public class ResultadoServiceImpl implements ResultadoService {
 
         ResultadoVotacaoResponse resposta = new ResultadoVotacaoResponse(pauta.getTitulo(), resultado.get("SIM"), resultado.get("NAO"));
 
-        produtor.enviarObjeto(resposta, filaDeVotacao);
+        produtor.enviarObjeto(resposta, exchangeDeVotacao, keyVotacao);
 
         return resposta;
     }
