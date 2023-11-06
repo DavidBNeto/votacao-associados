@@ -11,6 +11,8 @@ services:
       - rabbit
       - redis
     environment:
+      RABBITMQ_USER: guest2
+      RABBITMQ_PASSWORD: guest
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_DATASOURCE_USERNAME: usuario
       SPRING_DATASOURCE_PASSWORD: senha
@@ -30,13 +32,13 @@ services:
     image: 'redis:latest'
     ports:
       - "6379:6379"
-    command: [
-      "bash", "-c",
-      '
-       docker-entrypoint.sh
-       --requirepass password
-      '
-    ]
+#    command: [
+#      "bash", "-c",
+#      '
+#       docker-entrypoint.sh
+#       --requirepass password
+#      '
+#    ]
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "redis-cli ping"]
@@ -59,6 +61,4 @@ services:
       timeout: 5s
       retries: 5
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
       RABBITMQ_PLUGINS: "rabbitmq_management, rabbitmq_delayed_message_exchange"

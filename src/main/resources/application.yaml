@@ -1,5 +1,10 @@
 
 spring:
+  cache:
+    type: redis
+    index: 7
+    host: localhost
+    port: 6379
   datasource:
     driver-class-name: org.postgresql.Driver
     username: usuario
