@@ -9,6 +9,7 @@ import com.davidbneto.votacao.response.PautaCreationResponse;
 import com.davidbneto.votacao.service.PautaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ import static java.util.Objects.isNull;
 public class PautaServiceImpl implements PautaService {
 
     private final PautaRepository pautaRepository;
+    private final StringRedisTemplate redisCache;
 
     @Override
     public PautaCreationResponse criarPauta(PautaCreationRequest pautaCreationRequest) {
@@ -54,5 +56,6 @@ public class PautaServiceImpl implements PautaService {
         pauta.setFimDaVotacao(pauta.getInicioDaVotacao().plusMinutes(pautaVotingRequest.getMinutos()));
         pautaRepository.save(pauta);
         log.info("Votação da pauta {} iniciada com sucesso", pauta.getId());
+        redisCache.opsForValue().set(pauta.getId() + "", "pauta");
     }
 }
