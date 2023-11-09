@@ -1,0 +1,33 @@
+
+spring:
+  cache:
+    type: redis
+    index: 7
+    host: localhost
+    port: 6379
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: usuario
+    password: senha
+    url: jdbc:postgresql://localhost:5432/votacao
+  rabbitmq:
+    host: localhost
+    exchanges:
+      resultados:
+        name: resultados-votacao
+        key: resultados123
+  flyway:
+    locations: classpath:db/migration
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG

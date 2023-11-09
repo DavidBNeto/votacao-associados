@@ -23,7 +23,8 @@ Para executar o projeto, execute o comando abaixo na raiz do projeto:
 ```shell
 docker-compose up -d postgres
 docker-compose up -d rabbit
-java -jar build/libs/votacao-associados-0.0.1-SNAPSHOT.jar
+docker-compose up -d redis
+./gradlew bootRun
 ```
 ou, usando docker
 ```shell
@@ -34,6 +35,8 @@ Após o comando, a aplicação estará disponível em http://localhost:8080 e é
 ```shell
 ./smoketest.ps1 local
 ```
+
+A documentação da api está disponível através do swagger em http://localhost:8080/swagger-ui/index.html
 
 Caso queira simular envio de requisições usando postman, existe um arquivo JSON na raiz do projeto com as requisições necessárias para a aplicação.
 
@@ -51,7 +54,5 @@ Caso queira simular envio de requisições usando postman, existe um arquivo JSO
 - Implementar testes de contrato
 - Implementar testes de carga
 - Implementar testes de performance
-- Configurar devidamente o swagger
 - Mudar a arquitetura para um modelo de dois serviços, onde um deles é responsável pelas pautas e outro pelos votos, aumentando a escalabilidade
-- Adicionar cache para diminuir o número de requisições ao banco de dados (armazenar as pautas e os votos em memória)
 - Automaticamente gerar o resultado da votação quando o tempo acabar através de mensagens com delay em uma fila

@@ -19,7 +19,7 @@ public class RabbitConfig {
     @Bean
     public Channel channel() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost(host);
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
         return channel;

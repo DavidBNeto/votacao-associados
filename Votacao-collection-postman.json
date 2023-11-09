@@ -13,14 +13,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"titulo\": \"Festa na piscina no final de ano\"\r\n}",
+					"raw": "{\r\n    \"titulo\": \"Festa de final de ano na piscina\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:8080/v1/pauta"
+				"url": "localhost:8080/v1/pautas"
 			},
 			"response": []
 		},
@@ -31,14 +31,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2\r\n}",
+					"raw": "{\r\n    \"minutos\": 5,\r\n    \"id\": 30\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:8080/v1/pauta/iniciar"
+				"url": "localhost:8080/v1/pautas/iniciar"
 			},
 			"response": []
 		},
@@ -49,14 +49,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2\r\n}",
+					"raw": "{\r\n    \"id_pauta\": 30,\r\n    \"cpf\": \"810.072.500-46\",\r\n    \"voto\": \"sim\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:8080/v1/pauta/iniciar"
+				"url": "localhost:8080/v1/votos"
 			},
 			"response": []
 		},
@@ -65,16 +65,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "localhost:8080/v1/pauta/iniciar"
+				"url": "localhost:8080/v1/resultados/30"
 			},
 			"response": []
 		}
